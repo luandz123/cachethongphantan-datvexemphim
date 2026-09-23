@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package inventory;
+
+service InventoryService {
+  rpc GetShowtime (GetShowtimeRequest) returns (ShowtimeResponse);
+  rpc ListSeats (ListSeatsRequest) returns (SeatsResponse);
+  rpc ReserveSeat (ReserveSeatRequest) returns (ReserveSeatResponse);
+  rpc ResetData (ResetDataRequest) returns (ResetDataResponse);
+}
+
+message GetShowtimeRequest {
+  string showtimeId = 1;
+}
+
+message ShowtimeResponse {
+  string id = 1;
+  string movieName = 2;
+  string room = 3;
+  string showTime = 4;
+}
+
+message SeatItem {
+  string id = 1;
+  string showtimeId = 2;
+  string seatCode = 3;
+  string status = 4;
+  int32 version = 5;
+}
+
+message ListSeatsRequest {
+  string showtimeId = 1;
+}
+
+message SeatsResponse {
+  repeated SeatItem seats = 1;
+}
+
+message ReserveSeatRequest {
+  string seatId = 1;
+  string showtimeId = 2;
+  string userName = 3;
+}
+
+message ReserveSeatResponse {
+  bool success = 1;
+  string message = 2;
+  string seatId = 3;
+  string seatCode = 4;
+  string movieName = 5;
+  string showtimeId = 6;
+  string processedByHost = 7;
+  string timestamp = 8;
+}
+
+message ResetDataRequest {}
+
+message ResetDataResponse {
+  bool success = 1;
+  string message = 2;
+}

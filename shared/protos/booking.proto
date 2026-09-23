@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package booking;
+
+service BookingService {
+  rpc CreateBooking (CreateBookingRequest) returns (CreateBookingResponse);
+  rpc GetBooking (GetBookingRequest) returns (BookingResponse);
+  rpc ResetData (ResetBookingRequest) returns (ResetBookingResponse);
+}
+
+message CreateBookingRequest {
+  string showtimeId = 1;
+  string seatId = 2;
+  string userName = 3;
+}
+
+message CreateBookingResponse {
+  bool success = 1;
+  string bookingId = 2;
+  string seatId = 3;
+  string seatCode = 4;
+  string movieName = 5;
+  string showtimeId = 6;
+  string userName = 7;
+  string status = 8;
+  string createdAt = 9;
+  string processedByHost = 10;
+  string timestamp = 11;
+}
+
+message GetBookingRequest {
+  string bookingId = 1;
+}
+
+message BookingResponse {
+  string id = 1;
+  string seatId = 2;
+  string showtimeId = 3;
+  string userName = 4;
+  string status = 5;
+  string createdAt = 6;
+  string processedByHost = 7;
+}
+
+message ResetBookingRequest {}
+
+message ResetBookingResponse {
+  bool success = 1;
+  string message = 2;
+}
